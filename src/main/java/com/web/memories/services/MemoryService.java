@@ -2,6 +2,8 @@ package com.web.memories.services;
 
 import com.web.memories.domain.Memory;
 import com.web.memories.repositories.MemoryRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -11,6 +13,7 @@ import java.util.Optional;
 @Service
 @Transactional
 public class MemoryService {
+    private final Logger logger = LoggerFactory.getLogger(MemoryService.class);
     private final MemoryRepository memoryRepository;
     public MemoryService(MemoryRepository memoryRepository){
         this.memoryRepository = memoryRepository;
