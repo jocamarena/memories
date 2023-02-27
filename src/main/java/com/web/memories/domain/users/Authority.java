@@ -16,9 +16,6 @@ public class Authority {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "auth_id")
     private Long authId;
-    @Column(unique = true)
-    private String username;
-    private String password;
     private String permission;
     @ManyToMany(mappedBy = "authorities")
     private Set<Role> roles;
@@ -30,23 +27,6 @@ public class Authority {
     public void setAuthId(Long authId) {
         this.authId = authId;
     }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
     public String getPermission() {
         return permission;
     }
