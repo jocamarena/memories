@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.NoArgsConstructor;
+import lombok.Singular;
+
 import java.util.Set;
 
 @AllArgsConstructor
@@ -17,6 +19,7 @@ public class Role {
     private Long roleId;
     @Column(name = "role_name")
     private String roleName;
+    @Singular
     @ManyToMany
     @JoinTable(name = "role_authority",
             joinColumns = @JoinColumn(

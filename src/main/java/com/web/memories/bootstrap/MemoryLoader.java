@@ -6,6 +6,8 @@ import com.web.memories.domain.users.Authority;
 import com.web.memories.domain.users.Role;
 import com.web.memories.domain.users.User;
 import com.web.memories.services.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
@@ -23,6 +25,7 @@ public class MemoryLoader implements CommandLineRunner {
 
     private final UserService userService;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
+    private final Logger logger = LoggerFactory.getLogger(MemoryLoader.class);
     public MemoryLoader(MemoryService memoryService,
                         AuthorService authorService,
                         RoleService roleService,
@@ -82,7 +85,9 @@ public class MemoryLoader implements CommandLineRunner {
         adminUser.setRoles(new HashSet<>(Set.of(adminRole)));
 
         userService.saveUser(adminUser);
-
+        logger.info("encoded value: " + adminUser.getPassword());
+        adminUser.getRoles().forEach(role -> logger.info("role: " + role.getRoleName()));
+        adminUser.getAuthorities().forEach(authority -> logger.info("authority: " + authority.getPermission()));
 
     }
     public void loadMemory(){

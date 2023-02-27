@@ -2,6 +2,8 @@ package com.web.memories.controllers;
 
 import com.web.memories.domain.Memory;
 import com.web.memories.services.MemoryService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
@@ -11,13 +13,15 @@ import java.util.Optional;
 @RestController
 @RequestMapping("/api/v1/memories")
 public class MemoryController {
+    private final Logger logger = LoggerFactory.getLogger(MemoryController.class);
     private final MemoryService memoryService;
     public MemoryController(MemoryService memoryService){
         this.memoryService = memoryService;
     }
-
-    @GetMapping
+    @PreAuthorize(value = "hasAnyAuthority('read.author','read.memory')")
+    @GetMapping(produces = { "application/json" })
     public List<Memory> findAllMemories(){
+        logger.info("Get:findAllMemories");
         return memoryService.findAllMemories();
     }
     @GetMapping("/{id}")
