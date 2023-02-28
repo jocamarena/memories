@@ -70,24 +70,37 @@ public class MemoryLoader implements CommandLineRunner {
                 .roleName("ADMIN")
                 .build());
 
+        Role authorRole = roleService.saveRole(Role.builder()
+                .roleName("AUTHOR")
+                .build());
+
         User adminUser = userService.saveUser(User.builder()
                 .username("jcamarena")
+                .build());
+
+        User authorUser = userService.saveUser(User.builder()
+                .username("kcamarena")
                 .build());
 
         adminRole.setAuthorities(new HashSet<>(Set.of(
                 createMemoryAuthority, readMemoryAuthority, updateMemoryAuthority, deleteMemoryAuthority,
                 createAuthorityAuthority, readAuthorityAuthority,updateAuthorityAuthority, deleteAuthorityAuthority)));
 
-        roleService.saveRole(adminRole);
+        authorRole.setAuthorities(new HashSet<>(Set.of(
+                createMemoryAuthority, readMemoryAuthority, updateMemoryAuthority, deleteMemoryAuthority)));
+
+        roleService.saveAllRoles(Set.of(adminRole, authorRole));
 
         adminUser.setPassword(bCryptPasswordEncoder.encode("Clairdel803!"));
 
         adminUser.setRoles(new HashSet<>(Set.of(adminRole)));
 
-        userService.saveUser(adminUser);
-        logger.info("encoded value: " + adminUser.getPassword());
-        adminUser.getRoles().forEach(role -> logger.info("role: " + role.getRoleName()));
-        adminUser.getAuthorities().forEach(authority -> logger.info("authority: " + authority.getPermission()));
+        authorUser.setPassword(bCryptPasswordEncoder.encode("12037@166th"));
+
+        authorUser.setRoles(new HashSet<>(Set.of(authorRole)));
+
+        userService.saveAllUsers(Set.of(adminUser, authorUser));
+
 
     }
     public void loadMemory(){
