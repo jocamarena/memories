@@ -1,5 +1,6 @@
 package com.web.memories.domain;
 
+import jakarta.annotation.Nullable;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -59,6 +60,8 @@ public class Memory {
     }
 
     public Long getAuthorId() {
-        return this.author.getId();
+        if (this.author != null){
+            return this.author.getId();
+        } else return 0L;
     }
 }
