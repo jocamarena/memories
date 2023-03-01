@@ -40,6 +40,7 @@ public class MemoryLoader implements CommandLineRunner {
         this.bCryptPasswordEncoder = bCryptPasswordEncoder;
     }
     public void loadUser(){
+
         Authority createMemoryAuthority = authorityService.saveAuthority(Authority.builder()
                         .permission("create.memory")
                         .build());
@@ -74,12 +75,20 @@ public class MemoryLoader implements CommandLineRunner {
                 .roleName("AUTHOR")
                 .build());
 
+        Role readWriteMemoryRole = roleService.saveRole(Role.builder()
+                .roleName("READ_WRITE")
+                .build());
+
         User adminUser = userService.saveUser(User.builder()
                 .username("jcamarena")
                 .build());
 
         User authorUser = userService.saveUser(User.builder()
                 .username("kcamarena")
+                .build());
+
+        User memoryUser = userService.saveUser(User.builder()
+                .username("jcam")
                 .build());
 
         adminRole.setAuthorities(new HashSet<>(Set.of(
@@ -89,7 +98,10 @@ public class MemoryLoader implements CommandLineRunner {
         authorRole.setAuthorities(new HashSet<>(Set.of(
                 createMemoryAuthority, readMemoryAuthority, updateMemoryAuthority, deleteMemoryAuthority)));
 
-        roleService.saveAllRoles(Set.of(adminRole, authorRole));
+        readWriteMemoryRole.setAuthorities(new HashSet<>(Set.of(
+                createMemoryAuthority, readMemoryAuthority, createAuthorityAuthority, readAuthorityAuthority)));
+
+        roleService.saveAllRoles(Set.of(adminRole, authorRole, readWriteMemoryRole));
 
         adminUser.setPassword(bCryptPasswordEncoder.encode("Clairdel803!"));
 
@@ -99,7 +111,11 @@ public class MemoryLoader implements CommandLineRunner {
 
         authorUser.setRoles(new HashSet<>(Set.of(authorRole)));
 
-        userService.saveAllUsers(Set.of(adminUser, authorUser));
+        memoryUser.setPassword(bCryptPasswordEncoder.encode("Clairdel803!"));
+
+        memoryUser.setRoles(new HashSet<>(Set.of(readWriteMemoryRole)));
+
+        userService.saveAllUsers(Set.of(adminUser, authorUser, memoryUser));
 
 
     }
