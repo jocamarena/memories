@@ -1,6 +1,9 @@
 package com.web.memories.controllers;
 
 import com.web.memories.domain.Memory;
+import com.web.memories.security.annotations.CreateMemoryPermission;
+import com.web.memories.security.annotations.DeleteMemoryPermission;
+import com.web.memories.security.annotations.ReadMemoryPermission;
 import com.web.memories.services.MemoryService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,16 +21,18 @@ public class MemoryController {
     public MemoryController(MemoryService memoryService){
         this.memoryService = memoryService;
     }
-    @PreAuthorize(value = "hasAnyAuthority('read.author','read.memory')")
+    @ReadMemoryPermission
     @GetMapping(produces = { "application/json" })
     public List<Memory> findAllMemories(){
         logger.info("Get:findAllMemories");
         return memoryService.findAllMemories();
     }
+    @ReadMemoryPermission
     @GetMapping("/{id}")
     public Optional<Memory> findMemoryById(@PathVariable("id") Long id){
         return memoryService.findMemoryById(id);
     }
+    @DeleteMemoryPermission
     @DeleteMapping("/{id}")
     public Boolean deleteMemory(@PathVariable("id") Long id){
         Optional<Memory> optionalMemory = memoryService.findMemoryById(id);
@@ -36,6 +41,8 @@ public class MemoryController {
             return true;
         } else return false;
     }
+
+    @CreateMemoryPermission
     @PostMapping
     public Memory saveMemory(@RequestBody Memory memory){
         return memoryService.saveMemory(memory);
