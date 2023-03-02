@@ -5,6 +5,7 @@ import com.web.memories.security.annotations.CreateMemoryPermission;
 import com.web.memories.security.annotations.DeleteMemoryPermission;
 import com.web.memories.security.annotations.ReadMemoryPermission;
 import com.web.memories.services.MemoryService;
+import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -15,12 +16,13 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/v1/memories")
+@RequiredArgsConstructor
 public class MemoryController {
     private final Logger logger = LoggerFactory.getLogger(MemoryController.class);
     private final MemoryService memoryService;
-    public MemoryController(MemoryService memoryService){
+/*    public MemoryController(MemoryService memoryService){
         this.memoryService = memoryService;
-    }
+    }*/
     @ReadMemoryPermission
     @GetMapping(produces = { "application/json" })
     public List<Memory> findAllMemories(){

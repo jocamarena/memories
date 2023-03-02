@@ -23,7 +23,7 @@ public class Config {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
                 .authorizeHttpRequests((authorization) -> authorization
-                                .requestMatchers("/webjars/**", "/css/**", "/images/**", "/h2-console").permitAll()
+                                .requestMatchers("/webjars/**", "/css/**", "/images/**", "/h2-console", "/strings").permitAll()
                                 .anyRequest().authenticated()
                 )
                 .httpBasic(withDefaults())
