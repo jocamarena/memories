@@ -2,6 +2,7 @@ package com.web.memories.services;
 
 import com.web.memories.domain.Memory;
 import com.web.memories.repositories.MemoryRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -12,9 +13,11 @@ import java.util.Optional;
 @Transactional
 public class MemoryService {
     private final MemoryRepository memoryRepository;
-    public MemoryService(MemoryRepository memoryRepository){
+
+    public MemoryService(MemoryRepository memoryRepository) {
         this.memoryRepository = memoryRepository;
     }
+
     public Memory saveMemory(Memory memory){
         return memoryRepository.save(memory);
     }
