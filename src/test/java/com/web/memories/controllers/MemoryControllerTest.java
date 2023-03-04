@@ -25,6 +25,7 @@ import java.util.ArrayList;
 import java.util.Optional;
 import java.util.Set;
 
+import static org.hamcrest.Matchers.is;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
@@ -34,6 +35,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 @WebMvcTest(MemoryController.class)
 class MemoryControllerTest {
+//    private Logger logger = new LoggerFactory
     @Autowired
     private MockMvc mockMvc;
     @MockBean
@@ -49,6 +51,8 @@ class MemoryControllerTest {
         when(memoryRepository.findAll()).thenReturn(new ArrayList<>(Set.of(memory)));
         mockMvc.perform(get("/api/v1/memories")
                 .contentType(MediaType.APPLICATION_JSON))
-                .andExpect(status().isOk());
+                .andExpect(status().isOk())
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+                        .andExpect(jsonPath("$.size()", is(1)));
     }
 }
