@@ -7,6 +7,7 @@ import com.web.memories.services.MemoryService;
 import lombok.RequiredArgsConstructor;
 import org.aspectj.lang.annotation.Before;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -41,6 +42,7 @@ class MemoryControllerTest {
     @MockBean
     private MemoryRepository memoryRepository;
     @Test
+    @DisplayName("Memory Repository : Find All Memories")
     @WithMockUser(authorities = {"read.memory"})
     void findAllMemories() throws Exception {
         Memory memory = Memory.builder()
@@ -53,6 +55,6 @@ class MemoryControllerTest {
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
-                        .andExpect(jsonPath("$.size()", is(1)));
+                .andExpect(jsonPath("$.size()", is(1)));
     }
 }
