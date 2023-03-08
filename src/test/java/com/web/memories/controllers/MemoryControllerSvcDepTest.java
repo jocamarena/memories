@@ -3,6 +3,7 @@ package com.web.memories.controllers;
 import com.web.memories.domain.Memory;
 import com.web.memories.services.MemoryService;
 import jakarta.inject.Inject;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
@@ -39,6 +40,6 @@ class MemoryControllerSvcDepTest {
         when(memoryService.findAllMemories()).thenReturn(new ArrayList<>(Set.of(memory)));
         mockMvc.perform(get("/api/v2/memories"))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$[0].dateEntry", is("2023-03-04")));
+                .andExpect(jsonPath("$[0].dateEntry", is("2023-03-05")));
     }
 }

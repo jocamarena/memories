@@ -4,6 +4,7 @@ import com.web.memories.domain.Author;
 import com.web.memories.domain.Memory;
 import com.web.memories.domain.users.Authority;
 import com.web.memories.domain.users.Role;
+import com.web.memories.domain.users.RoleType;
 import com.web.memories.domain.users.User;
 import com.web.memories.services.*;
 import org.slf4j.Logger;
@@ -69,6 +70,7 @@ public class MemoryLoader implements CommandLineRunner {
 
         Role adminRole = roleService.saveRole(Role.builder()
                 .roleName("ADMIN")
+                .roleType(RoleType.ADMIN)
                 .build());
 
         Role authorRole = roleService.saveRole(Role.builder()
