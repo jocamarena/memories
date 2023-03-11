@@ -1,23 +1,30 @@
 <!DOCTYPE html>
 <html lang="en"
-      xmlns:th="https://www.thymeleaf.org/"
+      xmlns:th="http://www.thymeleaf.org/"
+      xmlns:secc="https://www.thymeleaf.org/thymeleaf-extras-springsecurity6"
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
     <title>Home</title>
 </head>
 <body>
-<div sec:authorize="isAuthenticated()">
+<div>
     <div>
-        <p>Authenticated</p>
-        <p th:if="${loginError}">Error logging in, check username and password</p>
+<!--        <p th:text="${#authentication?.isAuthenticated()}">Authenticated</p>
+        <p th:if="${loginError}">Error logging in, check username and password</p>-->
         <form>
             <label th:for="username" th:text="Username"/>
             <input type="text" th:id="username" name="username" autofocus="true"/>
             <label th:for="password" th:text="Password"/>
             <input type="password" th:id="password">
         </form>
-    </p>
+    </div>
+</div>
+<div>
+    <p th:text="'Principal : ' + ${#authentication?.getName()}"></p>
+    <p th:text="'attribute name: ' + ${username}"></p>
+    <p sec:authentication="principal.accountNonExpired"></p>
+<!--    <p sec:authentication="principal.getUsername()"></p>-->
 </div>
 </body>
 </html>
