@@ -1,4 +1,4 @@
-package com.web.memories.controllers.security;
+package com.web.memories.controllers;
 
 import com.web.memories.domain.Author;
 import com.web.memories.domain.Memory;

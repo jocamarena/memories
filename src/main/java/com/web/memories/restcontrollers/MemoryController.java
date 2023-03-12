@@ -1,18 +1,12 @@
-package com.web.memories.controllers;
+package com.web.memories.restcontrollers;
 
 import com.web.memories.domain.Memory;
 import com.web.memories.repositories.MemoryRepository;
 import com.web.memories.security.annotations.CreateMemoryPermission;
 import com.web.memories.security.annotations.DeleteMemoryPermission;
 import com.web.memories.security.annotations.ReadMemoryPermission;
-import com.web.memories.services.MemoryService;
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
-import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;

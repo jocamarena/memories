@@ -1,9 +1,9 @@
 package com.web.memories.controllers;
 
 import com.web.memories.domain.Memory;
+import com.web.memories.restcontrollers.MemoryControllerSvcDep;
 import com.web.memories.services.MemoryService;
 import jakarta.inject.Inject;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
@@ -19,7 +19,6 @@ import static org.hamcrest.Matchers.is;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
-import static org.junit.jupiter.api.Assertions.*;
 
 @WebMvcTest(MemoryControllerSvcDep.class)
 class MemoryControllerSvcDepTest {

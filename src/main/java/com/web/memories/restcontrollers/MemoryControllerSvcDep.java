@@ -1,4 +1,4 @@
-package com.web.memories.controllers;
+package com.web.memories.restcontrollers;
 
 import com.web.memories.domain.Memory;
 import com.web.memories.domain.dto.MemoryDTO;

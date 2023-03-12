@@ -1,4 +1,4 @@
-package com.web.memories.controllers.security;
+package com.web.memories.restcontrollers.security;
 
 import com.web.memories.domain.dto.security.RegisterUserDTO;
 import com.web.memories.domain.dto.security.UserDTO;
