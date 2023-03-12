@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org/"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <title>Save Memory</title>
+</head>
+<body>
+<div>
+    <form action="#" th:action="@{'/memories/add'}" th:object="${memorydto}" th:method="post">
+        <p>title: <input type="text" th:field="*{title}" /></p>
+        <p>body: <input type="text" th:field="*{body}" /></p>
+        <p>date: <input type="text" th:field="*{dateEntry}" /></p>
+        <p>author: <input type="text" th:field="*{author}" /></p>
+        <p><input type="submit" value="Submit" /> <input type="reset" value="Reset" /></p>
+    </form>
+</div>
+</body>
+</html>

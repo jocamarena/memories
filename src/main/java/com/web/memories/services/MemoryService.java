@@ -1,5 +1,6 @@
 package com.web.memories.services;
 
+import com.web.memories.domain.Author;
 import com.web.memories.domain.Memory;
 import com.web.memories.repositories.MemoryRepository;
 import org.slf4j.Logger;
@@ -35,5 +36,8 @@ public class MemoryService {
     }
     public List<Memory> findAllMemories(){
         return memoryRepository.findAll();
+    }
+    public List<Memory> findAllMemoriesByAuthor(Author author){
+        return memoryRepository.findMemoriesByAuthor(author);
     }
 }

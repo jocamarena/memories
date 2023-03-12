@@ -9,6 +9,11 @@
 <body>
 <div>
     <table>
+        <tr>
+            <th>Title</th>
+            <th th:text="Body"></th>
+            <th>AuthorId</th>
+        </tr>
         <tr th:each="memory : ${memories}">
             <td th:text="${memory.title}"></td>
             <td th:text="${memory.body}"></td>

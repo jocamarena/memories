@@ -27,4 +27,10 @@ public class AuthorService {
     public Optional<Author> findAuthorById(Long id) {
         return authorRepository.findById(id);
     }
+    public List<Author> findAuthorByLastNameAndFirstName(String lastname, String firstname){
+        return authorRepository.findAllByLastNameIgnoreCaseAndFirstNameIgnoreCase(lastname, firstname);
+    }
+    public List<Author> findAllAuthorsById(Long id){
+        return authorRepository.findAllById(id);
+    }
 }
